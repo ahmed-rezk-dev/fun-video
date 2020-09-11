@@ -1,7 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp } from 'react-icons/fa';
+import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp, FaRegClock } from 'react-icons/fa';
+
+// time convert helper
+const time_convert = (num) => {
+	var hours = Math.floor(num / 60);
+	var minutes = num % 60;
+	return hours + ':' + minutes;
+};
 
 function App() {
 	const videoEl = useRef();
@@ -9,6 +16,7 @@ function App() {
 	const [play, setPlay] = useState(false);
 	const [muted, setMuted] = useState(false);
 	const [volume, setVolume] = useState(0);
+	const [currentTime, setCurrentTime] = useState(0);
 
 	// handle Play video event
 	const handleOnPlay = () => {
@@ -29,6 +37,14 @@ function App() {
 		} else {
 			setMuted(true);
 		}
+	};
+
+	// handle Time Update event
+	const handleTimeUpdate = () => {
+		const minutes = parseInt(videoEl.current.duration / 60, 10);
+		const seconds = parseInt(videoEl.current.duration % 60);
+		const currentTimeTotal = parseInt(videoEl.current.currentTime);
+		setCurrentTime(`${time_convert(currentTimeTotal)} / ${minutes}:${seconds}`);
 	};
 
 	useEffect(() => {
@@ -60,6 +76,7 @@ function App() {
 								onPlay={handleOnPlay}
 								onPause={handleOnPause}
 								onVolumeChange={handleVolumeChange}
+								onTimeUpdate={handleTimeUpdate}
 							></video>
 						</div>
 					</div>
@@ -97,6 +114,13 @@ function App() {
 								)}
 							</div>
 							{/* END: Volume status */}
+
+							{/* START: time status */}
+							<div className="col-md-3  status-container">
+								<FaRegClock color="#007bff" size="30" />
+								<span>{currentTime}</span>
+							</div>
+							{/* END: time status */}
 						</div>
 					</div>
 				</div>
