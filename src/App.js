@@ -1,7 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp, FaRegClock } from 'react-icons/fa';
+import {
+	FaPlay,
+	FaPause,
+	FaVolumeMute,
+	FaVolumeUp,
+	FaRegClock,
+	FaClosedCaptioning,
+} from 'react-icons/fa';
 import videosArray from './fake-data';
 import time_convert from './Helper';
 
@@ -15,10 +22,14 @@ function App() {
 	const [muted, setMuted] = useState(false);
 	const [volume, setVolume] = useState(0);
 	const [currentTime, setCurrentTime] = useState(0);
+	const [textTracks, setTextTracks] = useState(false);
 
 	// handle Play video event
 	const handleOnPlay = () => {
 		setPlay(true);
+		if (videoEl.current.textTracks.length > 0) {
+			textTracks(true);
+		}
 	};
 
 	// handle Paused video event
@@ -117,6 +128,13 @@ function App() {
 							<div className="col-md-3  status-container">
 								<FaRegClock color="#007bff" size="30" />
 								<span>{currentTime}</span>
+							</div>
+							{/* END: time status */}
+
+							{/* START: time status */}
+							<div className="col-md-3  status-container">
+								<FaClosedCaptioning color="#007bff" size="30" />
+								<span>{textTracks ? 'YES' : 'NO'}</span>
 							</div>
 							{/* END: time status */}
 						</div>
