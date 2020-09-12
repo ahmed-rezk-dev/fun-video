@@ -2,16 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp, FaRegClock } from 'react-icons/fa';
+import videosArray from './fake-data';
+import time_convert from './Helper';
 
-// time convert helper
-const time_convert = (num) => {
-	var hours = Math.floor(num / 60);
-	var minutes = num % 60;
-	return hours + ':' + minutes;
-};
+var randomVideo = videosArray[Math.floor(Math.random() * videosArray.length)];
 
 function App() {
 	const videoEl = useRef();
+	console.log('videoEl:', videoEl);
 
 	const [play, setPlay] = useState(false);
 	const [muted, setMuted] = useState(false);
@@ -70,8 +68,8 @@ function App() {
 								ref={videoEl}
 								controls
 								className="video-player"
-								src="https://s3.eu-central-1.amazonaws.com/pipe.public.content/short.mp4"
-								poster="https://s3.eu-central-1.amazonaws.com/pipe.public.content/poster.png"
+								src={randomVideo.link}
+								poster={randomVideo.poster}
 								preload="none"
 								onPlay={handleOnPlay}
 								onPause={handleOnPause}
