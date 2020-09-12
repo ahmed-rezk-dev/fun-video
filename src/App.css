@@ -32,12 +32,17 @@ body {
 	height: 100%;
 	background: linear-gradient(10deg, #f4eba0 5%, #c0faca 95%);
 }
+.App {
+	height: 100vh;
+}
+.main-container {
+	height: 100vh;
+}
 header {
 	display: block;
-	min-height: 100px;
-	height: 100%;
 	position: relative;
-	margin: 4rem 3rem auto auto;
+	width: 100%;
+	margin-bottom: 5rem;
 }
 .title {
 	font-family: 'CoreCircus', sans-serif;
@@ -46,12 +51,6 @@ header {
 	text-align: center;
 	line-height: 1;
 	margin: 0;
-	top: 0%;
-	left: 0%;
-	right: 0%;
-	-webkit-transform: translate(0%, 0%);
-	transform: translate(0%, 0%);
-	position: absolute;
 	color: #f98ca4;
 	text-shadow: -1px -1px 0 #6e1f58, 1px -1px 0 #6e1f58, -1px 1px 0 #6e1f58, 1px 1px 0 #6e1f58,
 		1px 0px 0px #65f283, 0px 1px 0px #65f283, 2px 1px 0px #65f283, 1px 2px 0px #65f283,
@@ -96,12 +95,4 @@ header {
 .video-player {
 	width: 100%;
 	margin-bottom: 1rem;
-}
-.status-container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.status-container span {
-	margin-left: 0.5em;
 }

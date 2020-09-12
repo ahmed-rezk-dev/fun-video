@@ -28,7 +28,7 @@ function App() {
 	const handleOnPlay = () => {
 		setPlay(true);
 		if (videoEl.current.textTracks.length > 0) {
-			textTracks(true);
+			setTextTracks(true);
 		}
 	};
 
@@ -58,11 +58,12 @@ function App() {
 
 	useEffect(() => {
 		setVolume(videoEl.current.volume);
+		videoEl.current.title = randomVideo.title;
 	}, []);
 
 	return (
 		<div className="App">
-			<div className="container">
+			<div className="container main-container d-flex flex-column justify-content-center align-items-start">
 				{/* START: header */}
 				<header className="header">
 					<p className="title" data-heading="Fun Videos">
@@ -72,6 +73,12 @@ function App() {
 				{/* END: header */}
 
 				<div className="row">
+					{/* START: video title */}
+					<div className="col-md-12 text-left">
+						<h3>{randomVideo.title}</h3>
+					</div>
+					{/* END: video title */}
+
 					{/* START: video player */}
 					<div className="col-md-12">
 						<div className="video-container text-center">
@@ -94,49 +101,49 @@ function App() {
 					<div className="col-md-12">
 						<div className="row justify-content-center">
 							{/* START: playing status */}
-							<div className="col-md-3 status-container">
+							<div className="col-md-3 col-sm-3 d-flex justify-content-md-center justify-content-sm-start align-items-center mb-3">
 								{play ? (
 									<>
-										<FaPlay color="#20c997" size="20" /> <span>Playing</span>
+										<FaPlay color="#20c997" size="20" /> <span className="ml-1">Playing</span>
 									</>
 								) : (
 									<>
 										<FaPause color="#e83e8c" size="20" />
-										<span>Paused</span>
+										<span className="ml-1">Paused</span>
 									</>
 								)}
 							</div>
 							{/* END: playing status */}
 
 							{/* START: Volume status */}
-							<div className="col-md-3  status-container">
+							<div className="col-md-3 col-sm-3 d-flex justify-content-md-center justify-content-sm-start align-items-center mb-3">
 								{muted ? (
 									<>
 										<FaVolumeMute color="#4ad9db" size="30" />
-										<span>Muted</span>
+										<span className="ml-1">Muted</span>
 									</>
 								) : (
 									<>
 										<FaVolumeUp color="#4ad9db" size="30" />
-										<span>{parseInt(volume * 10)}</span>
+										<span className="ml-1">{parseInt(volume * 10)}</span>
 									</>
 								)}
 							</div>
 							{/* END: Volume status */}
 
 							{/* START: time status */}
-							<div className="col-md-3  status-container">
+							<div className="col-md-3 col-sm-3 d-flex justify-content-md-center justify-content-sm-start align-items-center mb-3">
 								<FaRegClock color="#007bff" size="30" />
-								<span>{currentTime}</span>
+								<span className="ml-1">{currentTime}</span>
 							</div>
 							{/* END: time status */}
 
-							{/* START: time status */}
-							<div className="col-md-3  status-container">
+							{/* START: video caption */}
+							<div className="col-md-3 col-sm-3 d-flex justify-content-md-center justify-content-sm-start align-items-center mb-3">
 								<FaClosedCaptioning color="#007bff" size="30" />
-								<span>{textTracks ? 'YES' : 'NO'}</span>
+								<span className="ml-1">{textTracks ? 'YES' : 'NO'}</span>
 							</div>
-							{/* END: time status */}
+							{/* END: video caption */}
 						</div>
 					</div>
 				</div>
