@@ -12,12 +12,11 @@ import {
 import videosArray from './fake-data';
 import time_convert from './Helper';
 
+// To load random video every time the pase is visited.
 var randomVideo = videosArray[Math.floor(Math.random() * videosArray.length)];
 
 function App() {
 	const videoEl = useRef();
-	console.log('videoEl:', videoEl);
-
 	const [play, setPlay] = useState(false);
 	const [muted, setMuted] = useState(false);
 	const [volume, setVolume] = useState(0);
